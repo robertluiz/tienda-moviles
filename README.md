@@ -23,7 +23,7 @@ Aplicación web para compra de dispositivos móviles, desarrollada con React.
 Clona el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/tienda-moviles.git
+git clone https://github.com/robertluiz/tienda-moviles.git
 cd tienda-moviles
 ```
 

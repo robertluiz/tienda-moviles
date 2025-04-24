@@ -10,10 +10,12 @@ import './ProductListPage.css';
 const ProductListPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [title, setTitle] = useState<string>('Todos los Productos');
+  const [animationKey, setAnimationKey] = useState<number>(0);
   const {
     products,
     filteredTotal,
     isLoading,
+    isLoadingMore,
     error,
     refetch,
     loadMore,
@@ -24,10 +26,11 @@ const ProductListPage = () => {
 
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
-    if (entry.isIntersecting && hasMore && !isLoading) {
+    if (entry.isIntersecting && hasMore && !isLoading && !isLoadingMore) {
       loadMore();
+      setAnimationKey(prev => prev + 1);
     }
-  }, [hasMore, isLoading, loadMore]);
+  }, [hasMore, isLoading, isLoadingMore, loadMore]);
 
   useEffect(() => {
     const options = {
@@ -52,6 +55,7 @@ const ProductListPage = () => {
   useEffect(() => {
     if (searchTerm) {
       setTitle(`Resultados para: ${searchTerm}`);
+      setAnimationKey(prev => prev + 1);
     } else {
       setTitle('Todos los Productos');
     }
@@ -63,6 +67,7 @@ const ProductListPage = () => {
 
   const handleLoadMore = () => {
     loadMore();
+    setAnimationKey(prev => prev + 1);
   };
 
   return (
@@ -86,7 +91,7 @@ const ProductListPage = () => {
             <ProductListSkeleton />
           ) : products.length > 0 ? (
             <>
-              <div className="product-grid">
+              <div className="product-grid" key={`product-grid-${animationKey}`}>
                 {products.map((product: Product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
@@ -97,9 +102,16 @@ const ProductListPage = () => {
                   <button
                     className="load-more-button"
                     onClick={handleLoadMore}
-                    disabled={isLoading}
+                    disabled={isLoading || isLoadingMore}
                   >
-                    {isLoading ? 'Cargando...' : 'Cargar más productos'}
+                    {isLoadingMore ? (
+                      <>
+                        <span className="button-loading-spinner"></span>
+                        <span>Cargando...</span>
+                      </>
+                    ) : (
+                      'Cargar más productos'
+                    )}
                   </button>
                 </div>
               )}
@@ -107,6 +119,13 @@ const ProductListPage = () => {
               <span className="products-counter">
                 Mostrando {products.length} de {filteredTotal} productos
               </span>
+
+              {isLoadingMore && (
+                <div className="loading-more-indicator">
+                  <div className="loading-spinner"></div>
+                  <span>Cargando más productos...</span>
+                </div>
+              )}
 
               <div ref={loadMoreRef} className="product-list-observer"></div>
             </>

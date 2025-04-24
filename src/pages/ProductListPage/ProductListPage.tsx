@@ -19,30 +19,44 @@ const ProductListPage = () => {
     error,
     refetch,
     loadMore,
-    hasMore
+    hasMore,
+    currentPage,
+    itemsPerPage
   } = useProductList(searchTerm);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
+  // Para depuração
+  useEffect(() => {
+    console.log(`Página atual: ${currentPage}, Produtos: ${products.length}, Total: ${filteredTotal}`);
+  }, [currentPage, products.length, filteredTotal]);
+
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
-    if (entry.isIntersecting && hasMore && !isLoading && !isLoadingMore) {
+    if (entry && entry.isIntersecting && hasMore && !isLoading && !isLoadingMore) {
+      console.log("Observer detectou - carregando mais produtos");
       loadMore();
       setAnimationKey(prev => prev + 1);
     }
   }, [hasMore, isLoading, isLoadingMore, loadMore]);
 
   useEffect(() => {
+    // Resetar o observer quando os produtos mudam
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
     const options = {
       root: null,
-      rootMargin: '200px',
-      threshold: 0.1
+      rootMargin: '300px',
+      threshold: 0
     };
 
     observerRef.current = new IntersectionObserver(handleObserver, options);
 
     if (loadMoreRef.current) {
       observerRef.current.observe(loadMoreRef.current);
+      console.log("Observer conectado");
     }
 
     return () => {
@@ -50,7 +64,7 @@ const ProductListPage = () => {
         observerRef.current.disconnect();
       }
     };
-  }, [handleObserver]);
+  }, [handleObserver, products.length]);
 
   useEffect(() => {
     if (searchTerm) {
@@ -66,6 +80,7 @@ const ProductListPage = () => {
   };
 
   const handleLoadMore = () => {
+    console.log("Botão clicado - carregando mais produtos");
     loadMore();
     setAnimationKey(prev => prev + 1);
   };
@@ -118,7 +133,7 @@ const ProductListPage = () => {
                 )}
 
                 <span className="products-counter">
-                  Mostrando {products.length} de {filteredTotal} productos
+                  Mostrando {products.length} de {filteredTotal} productos (Página {currentPage})
                 </span>
 
                 {isLoadingMore && (
@@ -128,7 +143,9 @@ const ProductListPage = () => {
                   </div>
                 )}
 
-                <div ref={loadMoreRef} className="product-list-observer"></div>
+                <div ref={loadMoreRef} className="product-list-observer" id="observer-element">
+                  {/* Elemento para o intersection observer */}
+                </div>
               </div>
             </>
           ) : (

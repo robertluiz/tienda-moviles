@@ -101,101 +101,62 @@
 .product-grid .product-card:nth-child(6) { animation-delay: 0.6s; }
 .product-grid .product-card:nth-child(n+7) { animation-delay: 0.7s; }
 
-.reload-button {
-  background-color: var(--color-primary);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  transition: background-color 0.3s;
-}
-
-.reload-button:hover {
-  background-color: var(--color-primary-dark);
-}
-
+/* Load more section */
 .load-more-section {
-  margin-top: 2rem;
-  position: relative;
-  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  gap: 1.5rem;
 }
 
 .load-more-container {
   display: flex;
   justify-content: center;
-  margin: 2rem 0;
 }
 
 .load-more-button {
-  background-color: var(--color-background-light);
-  color: var(--color-primary);
-  border: 1px solid var(--color-primary);
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
   padding: 0.75rem 1.5rem;
-  border-radius: 0.25rem;
+  border-radius: 4px;
+  font-weight: 500;
   cursor: pointer;
-  font-size: 0.875rem;
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  transition: background-color 0.2s;
 }
 
 .load-more-button:hover {
-  background-color: var(--color-primary);
-  color: white;
+  background-color: var(--color-primary-dark);
 }
 
 .load-more-button:disabled {
-  background-color: var(--color-background-light);
-  color: var(--color-text-secondary);
-  border-color: var(--color-border);
+  background-color: var(--color-border);
   cursor: not-allowed;
-}
-
-.button-loading-spinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  border-top-color: currentColor;
-  animation: spin 1s ease-in-out infinite;
-  display: inline-block;
 }
 
 .loading-more-indicator {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.75rem;
-  margin: 1.5rem 0;
-  opacity: 0;
-  animation: fadeIn 0.3s ease-out forwards;
+  color: var(--color-text-secondary);
 }
 
 .loading-more-indicator .loading-spinner {
   width: 24px;
   height: 24px;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .products-counter {
-  display: block;
-  text-align: center;
-  color: var(--color-text-secondary);
   font-size: 0.875rem;
+  color: var(--color-text-secondary);
   margin-top: 0.5rem;
 }
 
 .product-list-observer {
   width: 100%;
-  height: 100px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin-top: 0;
-  background-color: transparent;
+  opacity: 0;
 }
 
 @media (max-width: 768px) {

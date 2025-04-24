@@ -5,8 +5,9 @@ import './Header.css';
 const Header = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
-  const isProductsPage = location.pathname === '/productos';
+  const isProductListPage = location.pathname === '/' || location.pathname === '/productos';
   const isCartPage = location.pathname === '/cart';
+  const isProductDetailPage = location.pathname.startsWith('/product/');
 
   return (
     <header className="site-header">
@@ -23,15 +24,15 @@ const Header = () => {
           </div>
         </div>
 
-        {(isCartPage || (!isHomePage && !isProductsPage)) && (
+        {(isCartPage || isProductDetailPage) && (
           <div className="breadcrumbs">
             <ul>
               <li>
                 <Link to="/">Inicio</Link>
               </li>
-              {!isCartPage && (
+              {isProductDetailPage && (
                 <li className="active">
-                  {isProductsPage ? 'Productos' : 'Producto'}
+                  Producto
                 </li>
               )}
               {isCartPage && (

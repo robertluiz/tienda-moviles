@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import Header from '../../components/Header/Header';
+import Layout from '../../components/Layout/Layout';
 import useProductList from '../../hooks/useProductList';
 import ProductListSkeleton from '../../components/ProductListSkeleton/ProductListSkeleton';
 import './ProductListPage.css';
@@ -97,72 +97,66 @@ const ProductListPage: React.FC = () => {
   };
 
   return (
-    <div className="page-container">
-      <Header />
+    <Layout>
+      <div className="page-header">
+        <h1 className="page-title">{title}</h1>
+        <SearchBar onSearch={handleSearch} />
+      </div>
 
-      <div className="main-content">
-        <div className="container">
-          <div className="page-header">
-            <h1 className="page-title">{title}</h1>
-            <SearchBar onSearch={handleSearch} />
-          </div>
+      {isLoading && products.length === 0 ? (
+        <ProductListSkeleton />
+      ) : (
+        <>
+          {renderErrorOrEmpty()}
 
-          {isLoading && products.length === 0 ? (
-            <ProductListSkeleton />
-          ) : (
+          {products.length > 0 && (
             <>
-              {renderErrorOrEmpty()}
+              <div className="product-grid">
+                {products.map((product: Product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    isNew={product.id === '1'} // Exemplo, substitua pela lógica real
+                  />
+                ))}
+              </div>
 
-              {products.length > 0 && (
-                <>
-                  <div className="product-grid">
-                    {products.map((product: Product) => (
-                      <ProductCard
-                        key={product.id}
-                        product={product}
-                        isNew={product.id === '1'} // Exemplo, substitua pela lógica real
-                      />
-                    ))}
+              <div className="load-more-section">
+                {isLoadingMore && (
+                  <div className="loading-more-indicator">
+                    <div className="loading-spinner"></div>
+                    <span>Cargando más productos...</span>
                   </div>
+                )}
 
-                  <div className="load-more-section">
-                    {isLoadingMore && (
-                      <div className="loading-more-indicator">
-                        <div className="loading-spinner"></div>
-                        <span>Cargando más productos...</span>
-                      </div>
-                    )}
-
-                    {hasMore && !isLoadingMore && (
-                      <div className="load-more-container">
-                        <button
-                          className="load-more-button"
-                          onClick={loadMore}
-                          disabled={isLoading || isLoadingMore}
-                        >
-                          Cargar más productos
-                        </button>
-                      </div>
-                    )}
-
-                    <span className="products-counter">
-                      Mostrando {products.length} de {filteredTotal} productos (Página {currentPage})
-                    </span>
-
-                    {/* Elemento para o intersection observer (invisível) */}
-                    <div
-                      ref={loaderRef}
-                      className="product-list-observer"
-                      style={{ height: '100px', margin: '20px 0' }}
-                    />
+                {hasMore && !isLoadingMore && (
+                  <div className="load-more-container">
+                    <button
+                      className="load-more-button"
+                      onClick={loadMore}
+                      disabled={isLoading || isLoadingMore}
+                    >
+                      Cargar más productos
+                    </button>
                   </div>
-                </>
-              )}
+                )}
+
+                <span className="products-counter">
+                  Mostrando {products.length} de {filteredTotal} productos (Página {currentPage})
+                </span>
+
+                {/* Elemento para o intersection observer (invisível) */}
+                <div
+                  ref={loaderRef}
+                  className="product-list-observer"
+                  style={{ height: '100px', margin: '20px 0' }}
+                />
+              </div>
             </>
           )}
-        </div>
-      </div>
-    </div>
+        </>
+      )}
+    </Layout>
   );
 };
 

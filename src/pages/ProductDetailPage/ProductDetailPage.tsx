@@ -21,7 +21,7 @@ const ProductDetailPage = () => {
                     <div className="container">
                         <div className="loading-container">
                             <div className="loading-spinner"></div>
-                            <p>Carregando detalhes do produto...</p>
+                            <p>Cargando detalles del producto...</p>
                         </div>
                     </div>
                 </div>
@@ -36,9 +36,9 @@ const ProductDetailPage = () => {
                 <div className="product-detail-content">
                     <div className="container">
                         <div className="error-container">
-                            <p className="error-message">Ocorreu um erro ao carregar os detalhes do produto.</p>
+                            <p className="error-message">Se ha producido un error al cargar los detalles del producto.</p>
                             <button className="reload-button" onClick={() => refetch()}>
-                                Tentar novamente
+                                Intentar de nuevo
                             </button>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ const ProductDetailPage = () => {
                 <div className="container">
                     <div className="product-detail-header">
                         <div className="product-breadcrumb">
-                            <Link to="/">Produtos</Link>
+                            <Link to="/">Productos</Link>
                             <span>/</span>
                             <span>{product.brand}</span>
                             <span>/</span>
@@ -98,7 +98,7 @@ const ProductDetailPage = () => {
 
                             <div className="product-options-container">
                                 <div className="color-options">
-                                    <h3 className="option-title">Cor</h3>
+                                    <h3 className="option-title">Color</h3>
                                     <div className="option-list">
                                         {product.options.colors.map((color) => (
                                             <button
@@ -113,7 +113,7 @@ const ProductDetailPage = () => {
                                 </div>
 
                                 <div className="storage-options">
-                                    <h3 className="option-title">Armazenamento</h3>
+                                    <h3 className="option-title">Almacenamiento</h3>
                                     <div className="option-list">
                                         {product.options.storages.map((storage) => (
                                             <button
@@ -133,7 +133,7 @@ const ProductDetailPage = () => {
                                 disabled={!canAddToCart || isAddingToCart}
                                 onClick={handleAddToCart}
                             >
-                                {isAddingToCart ? 'Adicionando...' : 'Adicionar ao Carrinho'}
+                                {isAddingToCart ? 'Añadiendo...' : 'Añadir al carrito'}
                             </button>
                         </div>
                     </div>

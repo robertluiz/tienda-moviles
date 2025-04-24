@@ -9,14 +9,14 @@ import './ProductListPage.css';
 
 const ProductListPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [title, setTitle] = useState<string>('Todos os Produtos');
+  const [title, setTitle] = useState<string>('Todos los Productos');
   const { products, isLoading, error, refetch } = useProductList(searchTerm);
 
   useEffect(() => {
     if (searchTerm) {
       setTitle(`Resultados para: ${searchTerm}`);
     } else {
-      setTitle('Todos os Produtos');
+      setTitle('Todos los Productos');
     }
   }, [searchTerm]);
 
@@ -36,9 +36,9 @@ const ProductListPage = () => {
 
           {error ? (
             <div className="error-container">
-              <p className="error-message">Ocorreu um erro ao carregar os produtos.</p>
+              <p className="error-message">Se ha producido un error al cargar los productos.</p>
               <button className="reload-button" onClick={() => refetch()}>
-                Tentar novamente
+                Intentar de nuevo
               </button>
             </div>
           ) : isLoading ? (
@@ -51,7 +51,7 @@ const ProductListPage = () => {
             </div>
           ) : (
             <div className="error-container">
-              <p>Nenhum produto encontrado.</p>
+              <p>No se han encontrado productos.</p>
             </div>
           )}
         </div>

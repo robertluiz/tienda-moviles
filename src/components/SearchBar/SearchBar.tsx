@@ -17,7 +17,7 @@ const SearchBar = ({ onSearch, placeholder = 'Buscar productos...' }: SearchBarP
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTerm(value);
-    onSearch(value); // Realiza busca em tempo real
+    onSearch(value);
   };
 
   const handleClear = () => {
@@ -37,9 +37,9 @@ const SearchBar = ({ onSearch, placeholder = 'Buscar productos...' }: SearchBarP
           aria-label="Buscar"
         />
         {searchTerm && (
-          <button 
-            type="button" 
-            className="clear-button" 
+          <button
+            type="button"
+            className="clear-button"
             onClick={handleClear}
             aria-label="Limpiar búsqueda"
           >

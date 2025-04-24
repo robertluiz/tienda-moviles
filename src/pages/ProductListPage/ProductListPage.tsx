@@ -1,33 +1,65 @@
-import { useState } from 'react';
-import Header from '../../components/Header/Header';
+import { useEffect, useState } from 'react';
+import useProductList from '../../hooks/useProductList';
+import ProductCard from '../../components/ProductCard/ProductCard';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import ProductList from '../../components/ProductList/ProductList';
-import useProducts from '../../hooks/useProducts';
+import Header from '../../components/Header/Header';
+import { Product } from '../../services/api';
+import './ProductListPage.css';
 
 const ProductListPage = () => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const { products, isLoading, error } = useProducts(searchTerm);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [title, setTitle] = useState<string>('Todos os Produtos');
+  const { products, isLoading, error, refetch } = useProductList(searchTerm);
 
-    const handleSearch = (term: string) => {
-        setSearchTerm(term);
-    };
+  useEffect(() => {
+    if (searchTerm) {
+      setTitle(`Resultados para: ${searchTerm}`);
+    } else {
+      setTitle('Todos os Produtos');
+    }
+  }, [searchTerm]);
 
-    return (
-        <div>
-            <Header />
-            <main className="container">
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
-                    <SearchBar onSearch={handleSearch} />
-                </div>
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+  };
 
-                {error ? (
-                    <p>Error al cargar los productos. Por favor, inténtelo más tarde.</p>
-                ) : (
-                    <ProductList products={products} isLoading={isLoading} />
-                )}
-            </main>
+  return (
+    <div className="page-container">
+      <Header />
+      <div className="main-content">
+        <div className="container">
+          <div className="page-header">
+            <h1 className="page-title">{title}</h1>
+            <SearchBar onSearch={handleSearch} />
+          </div>
+
+          {error ? (
+            <div className="error-container">
+              <p className="error-message">Ocorreu um erro ao carregar os produtos.</p>
+              <button className="reload-button" onClick={() => refetch()}>
+                Tentar novamente
+              </button>
+            </div>
+          ) : isLoading ? (
+            <div className="loading-container">
+              <div className="loading-spinner"></div>
+              <p>Carregando produtos...</p>
+            </div>
+          ) : products.length > 0 ? (
+            <div className="product-grid">
+              {products.map((product: Product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          ) : (
+            <div className="error-container">
+              <p>Nenhum produto encontrado.</p>
+            </div>
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default ProductListPage; 

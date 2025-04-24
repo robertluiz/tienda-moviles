@@ -27,6 +27,7 @@ export const useProductList = (searchTerm: string = '') => {
     setDisplayedProducts([]);
     setCurrentPage(1);
     setHasMore(true);
+    setIsLoadingMore(false);
   }, [searchTerm]);
 
   useEffect(() => {
@@ -40,12 +41,13 @@ export const useProductList = (searchTerm: string = '') => {
 
   const loadMore = useCallback(() => {
     if (!isLoading && hasMore && !isLoadingMore) {
+      console.log('Carregando mais produtos...');
       setIsLoadingMore(true);
       
-      // Pequeno atraso para permitir a transição suave
+      // Usando um timeout mais curto para melhorar a responsividade no scroll infinito
       setTimeout(() => {
         setCurrentPage(prevPage => prevPage + 1);
-      }, 300);
+      }, 200);
     }
   }, [isLoading, hasMore, isLoadingMore]);
 

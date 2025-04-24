@@ -35,8 +35,8 @@ const ProductListPage = () => {
   useEffect(() => {
     const options = {
       root: null,
-      rootMargin: '0px',
-      threshold: 1.0
+      rootMargin: '200px',
+      threshold: 0.1
     };
 
     observerRef.current = new IntersectionObserver(handleObserver, options);
@@ -97,37 +97,39 @@ const ProductListPage = () => {
                 ))}
               </div>
 
-              {hasMore && (
-                <div className="load-more-container">
-                  <button
-                    className="load-more-button"
-                    onClick={handleLoadMore}
-                    disabled={isLoading || isLoadingMore}
-                  >
-                    {isLoadingMore ? (
-                      <>
-                        <span className="button-loading-spinner"></span>
-                        <span>Cargando...</span>
-                      </>
-                    ) : (
-                      'Cargar más productos'
-                    )}
-                  </button>
-                </div>
-              )}
+              <div className="load-more-section">
+                {hasMore && (
+                  <div className="load-more-container">
+                    <button
+                      className="load-more-button"
+                      onClick={handleLoadMore}
+                      disabled={isLoading || isLoadingMore}
+                    >
+                      {isLoadingMore ? (
+                        <>
+                          <span className="button-loading-spinner"></span>
+                          <span>Cargando...</span>
+                        </>
+                      ) : (
+                        'Cargar más productos'
+                      )}
+                    </button>
+                  </div>
+                )}
 
-              <span className="products-counter">
-                Mostrando {products.length} de {filteredTotal} productos
-              </span>
+                <span className="products-counter">
+                  Mostrando {products.length} de {filteredTotal} productos
+                </span>
 
-              {isLoadingMore && (
-                <div className="loading-more-indicator">
-                  <div className="loading-spinner"></div>
-                  <span>Cargando más productos...</span>
-                </div>
-              )}
+                {isLoadingMore && (
+                  <div className="loading-more-indicator">
+                    <div className="loading-spinner"></div>
+                    <span>Cargando más productos...</span>
+                  </div>
+                )}
 
-              <div ref={loadMoreRef} className="product-list-observer"></div>
+                <div ref={loadMoreRef} className="product-list-observer"></div>
+              </div>
             </>
           ) : (
             <div className="error-container">

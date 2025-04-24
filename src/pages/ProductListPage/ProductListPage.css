@@ -116,6 +116,11 @@
   background-color: var(--color-primary-dark);
 }
 
+.load-more-section {
+  margin-top: 2rem;
+  position: relative;
+}
+
 .load-more-container {
   display: flex;
   justify-content: center;
@@ -184,8 +189,12 @@
 
 .product-list-observer {
   width: 100%;
-  height: 20px;
-  margin-top: 2rem;
+  height: 50px;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  margin-top: 1rem;
+  opacity: 0;
 }
 
 @media (max-width: 768px) {

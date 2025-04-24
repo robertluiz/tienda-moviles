@@ -12,14 +12,15 @@ Este documento rastrea el progreso de la implementación de la tienda virtual de
 - [x] Implementar selectores de opciones (color y almacenamiento)
 - [x] Implementar adición al carrito
 - [x] Implementar sistema de notificaciones
+- [x] Integrar persistencia de conteo del carrito
+- [x] Mejorar widget del carrito con animaciones y feedback
 
 ## Tareas en Progreso
 
-- [ ] Integrar persistencia de conteo del carrito
+- [ ] Crear página de carrito de compras
 
 ## Tareas Futuras
 
-- [ ] Añadir página de carrito de compras
 - [ ] Implementar checkout
 - [ ] Añadir sistema de valoraciones y comentarios
 - [ ] Implementar funcionalidad de favoritos
@@ -34,6 +35,8 @@ La tienda de dispositivos móviles será implementada usando React con TypeScrip
 - src/hooks/useProductDetails.ts - Hook para buscar detalles de un producto específico
 - src/hooks/useCart.ts - Hook para gestionar adición al carrito
 - src/hooks/useNotifications.ts - Hook para gestionar notificaciones en la aplicación
+- src/store/cartStore.ts - Gestión del estado del carrito con Zustand y persistencia
+- src/components/CartWidget - Componente para visualizar el carrito y sus notificaciones
 - src/components/Notification - Componentes para mostrar notificaciones
 - src/pages/ProductDetailPage/ProductDetailPage.tsx - Página de detalles del producto
 - src/pages/ProductDetailPage/ProductDetailPage.css - Estilos de la página de detalles
@@ -54,14 +57,15 @@ La tienda de dispositivos móviles será implementada usando React con TypeScrip
 - [x] Implementar adición al carrito
 - [x] Implementar sistema de notificaciones
 - [x] Traducir aplicación al español
+- [x] Integrar persistencia de conteo del carrito
+- [x] Crear widget de carrito con feedback visual
 
 ## Tareas en Progreso
 
-- [ ] Integrar persistencia de conteo del carrito
+- [ ] Crear página de carrito
 
 ## Tareas Futuras
 
-- [ ] Crear página de carrito
 - [ ] Implementar layout responsive
 - [ ] Añadir navegación entre páginas
 - [ ] Crear documentación del proyecto
@@ -89,6 +93,7 @@ La aplicación estará estructurada con los siguientes elementos:
 4. **Caché & Persistencia**:
    - Almacenamiento local para datos de la API
    - Expiración de caché de 1 hora
+   - Persistencia del carrito con Zustand + localStorage
 
 ### Endpoints API
 
@@ -112,6 +117,7 @@ La aplicación estará estructurada con los siguientes elementos:
 - `/src/hooks/useProductDetails.ts` - Hook para buscar detalles de un producto ✅
 - `/src/hooks/useCart.ts` - Hook para gestionar adición al carrito ✅
 - `/src/hooks/useNotifications.ts` - Hook para gestionar notificaciones ✅
+- `/src/components/CartWidget` - Componente para visualizar el carrito ✅
 - `/src/components/Notification` - Componentes para sistema de notificaciones ✅
 - `/src/utils/storage.ts` - Utilidades para almacenamiento local con expiración ✅
 - `/src/styles/index.css` - Estilos globales de la aplicación ✅

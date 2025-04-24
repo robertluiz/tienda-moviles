@@ -1,18 +1,19 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { AddToCartRequest, addToCart } from '../services/api';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import { AddToCartRequest, AddToCartResponse, addToCart } from '../services/api';
 
 interface CartState {
   cartCount: number;
   lastAddedProduct: AddToCartRequest | null;
-  addProductToCart: (request: AddToCartRequest) => Promise<void>;
+  addProductToCart: (request: AddToCartRequest) => Promise<AddToCartResponse>;
   setCartCount: (count: number) => void;
   clearLastAddedProduct: () => void;
+  resetCart: () => void;
 }
 
 const useCartStore = create<CartState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       cartCount: 0,
       lastAddedProduct: null,
       
@@ -23,6 +24,7 @@ const useCartStore = create<CartState>()(
             cartCount: response.count,
             lastAddedProduct: request
           });
+          return response;
         } catch (error) {
           console.error('Error al añadir producto al carrito:', error);
           throw error;
@@ -35,14 +37,24 @@ const useCartStore = create<CartState>()(
 
       clearLastAddedProduct: () => {
         set({ lastAddedProduct: null });
+      },
+
+      resetCart: () => {
+        set({ cartCount: 0, lastAddedProduct: null });
       }
     }),
     {
       name: 'cart-storage',
+      storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({ 
         cartCount: state.cartCount,
         lastAddedProduct: state.lastAddedProduct
       }),
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          console.log('Estado del carrito restaurado desde localStorage:', state);
+        }
+      }
     }
   )
 );

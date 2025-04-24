@@ -1,7 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchProducts, Product } from '../services/api';
+import { useState, useCallback, useEffect } from 'react';
 
 export const useProductList = (searchTerm: string = '') => {
+  const [displayedProducts, setDisplayedProducts] = useState<Product[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const itemsPerPage = 6;
+
   const { data: products = [], isLoading, error, refetch } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,
@@ -16,11 +22,34 @@ export const useProductList = (searchTerm: string = '') => {
       )
     : products;
 
+  useEffect(() => {
+    setDisplayedProducts([]);
+    setCurrentPage(1);
+    setHasMore(true);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (filteredProducts.length > 0) {
+      const nextItems = filteredProducts.slice(0, currentPage * itemsPerPage);
+      setDisplayedProducts(nextItems);
+      setHasMore(nextItems.length < filteredProducts.length);
+    }
+  }, [filteredProducts, currentPage]);
+
+  const loadMore = useCallback(() => {
+    if (!isLoading && hasMore) {
+      setCurrentPage(prevPage => prevPage + 1);
+    }
+  }, [isLoading, hasMore]);
+
   return {
-    products: filteredProducts,
+    products: displayedProducts,
+    filteredTotal: filteredProducts.length,
     isLoading,
     error,
-    refetch
+    refetch,
+    loadMore,
+    hasMore
   };
 };
 

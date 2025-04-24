@@ -1,7 +1,7 @@
 .site-header {
   background-color: var(--color-background);
   border-bottom: 1px solid var(--color-border);
-  padding: var(--spacing-m) 0;
+  padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -9,21 +9,19 @@
 
 .header-inner {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-s) 0;
-}
-
-.logo h1 {
-  font-size: var(--font-size-large);
-  font-weight: 500;
-  margin: 0;
-  letter-spacing: 0.5px;
+  align-items: center;
 }
 
 .logo a {
-  color: var(--color-text);
   text-decoration: none;
+  color: var(--color-text);
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
 }
 
 .main-nav ul {
@@ -50,6 +48,7 @@
 .header-actions {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .cart-icon {
@@ -81,33 +80,37 @@
 }
 
 .breadcrumbs {
-  padding: var(--spacing-m) 0;
+  margin-top: 1rem;
 }
 
 .breadcrumbs ul {
   display: flex;
+  align-items: center;
   list-style: none;
-  gap: var(--spacing-s);
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
 }
 
 .breadcrumbs li {
-  font-size: var(--font-size-small);
-  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
 }
 
 .breadcrumbs li:not(:last-child)::after {
-  content: "›";
-  margin-left: var(--spacing-s);
+  content: '/';
+  margin: 0 0.5rem;
+  color: var(--color-text-secondary);
 }
 
 .breadcrumbs a {
-  color: var(--color-text-light);
+  color: var(--color-text-secondary);
   text-decoration: none;
 }
 
 .breadcrumbs a:hover {
-  color: var(--color-accent);
-  text-decoration: none;
+  color: var(--color-primary);
+  text-decoration: underline;
 }
 
 .breadcrumbs .active {

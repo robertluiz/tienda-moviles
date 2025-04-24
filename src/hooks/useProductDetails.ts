@@ -12,7 +12,9 @@ export const useProductDetails = (productId: string) => {
     queryFn: () => fetchProductDetails(productId),
     staleTime: 60 * 60 * 1000, // 1 hora
     gcTime: 60 * 60 * 1000, // 1 hora (anteriormente cacheTime)
-    enabled: !!productId
+    enabled: !!productId,
+    retry: 3,
+    retryDelay: 1000
   });
 
   return {

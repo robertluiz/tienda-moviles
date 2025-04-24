@@ -4,15 +4,15 @@ import useCartStore from '../../store/cartStore';
 import './CartWidget.css';
 
 const CartWidget = () => {
-    const { cartCount, lastAddedProduct, clearLastAddedProduct } = useCartStore();
+    const { cartCount } = useCartStore();
     const [showTooltip, setShowTooltip] = useState(false);
     const [animate, setAnimate] = useState(false);
     const prevCountRef = useRef(cartCount);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        // Mostrar tooltip solo si el carrito incrementa y hay un producto añadido
-        if (cartCount > prevCountRef.current && lastAddedProduct) {
+        // Mostrar tooltip solo si el carrito incrementa
+        if (cartCount > prevCountRef.current) {
             setShowTooltip(true);
             setAnimate(true);
 
@@ -23,7 +23,6 @@ const CartWidget = () => {
 
             timeoutRef.current = setTimeout(() => {
                 setShowTooltip(false);
-                clearLastAddedProduct();
             }, 5000);
         }
 
@@ -34,11 +33,10 @@ const CartWidget = () => {
                 clearTimeout(timeoutRef.current);
             }
         };
-    }, [cartCount, lastAddedProduct, clearLastAddedProduct]);
+    }, [cartCount]);
 
     const handleCloseTooltip = () => {
         setShowTooltip(false);
-        clearLastAddedProduct();
 
         if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
@@ -48,7 +46,7 @@ const CartWidget = () => {
 
     return (
         <div className={`cart-widget ${showTooltip ? 'active' : ''}`}>
-            <Link to="/carrito" className="cart-icon">
+            <Link to="/cart" className="cart-icon">
                 <span className="icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="9" cy="21" r="1"></circle>
@@ -63,7 +61,7 @@ const CartWidget = () => {
                 )}
             </Link>
 
-            {showTooltip && lastAddedProduct && (
+            {showTooltip && (
                 <div className="cart-tooltip">
                     <div className="cart-tooltip-header">
                         <h4 className="cart-tooltip-title">Producto añadido al carrito</h4>
@@ -83,7 +81,7 @@ const CartWidget = () => {
                         <Link to="/" className="cart-tooltip-action secondary" onClick={handleCloseTooltip}>
                             Seguir comprando
                         </Link>
-                        <Link to="/carrito" className="cart-tooltip-action" onClick={handleCloseTooltip}>
+                        <Link to="/cart" className="cart-tooltip-action" onClick={handleCloseTooltip}>
                             Ver carrito
                         </Link>
                     </div>

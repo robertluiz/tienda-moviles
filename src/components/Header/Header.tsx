@@ -6,6 +6,7 @@ const Header = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const isProductsPage = location.pathname === '/productos';
+  const isCartPage = location.pathname === '/cart';
 
   return (
     <header className="site-header">
@@ -17,34 +18,30 @@ const Header = () => {
             </Link>
           </div>
 
-          <nav className="main-nav">
-            <ul>
-              <li className={isHomePage ? 'active' : ''}>
-                <Link to="/">Inicio</Link>
-              </li>
-              <li className={isProductsPage ? 'active' : ''}>
-                <Link to="/productos">Productos</Link>
-              </li>
-            </ul>
-          </nav>
-
           <div className="header-actions">
             <CartWidget />
           </div>
         </div>
 
-        <div className="breadcrumbs">
-          <ul>
-            <li>
-              <Link to="/">Inicio</Link>
-            </li>
-            {!isHomePage && (
-              <li className="active">
-                {isProductsPage ? 'Productos' : 'Producto'}
+        {!isHomePage && (
+          <div className="breadcrumbs">
+            <ul>
+              <li>
+                <Link to="/">Inicio</Link>
               </li>
-            )}
-          </ul>
-        </div>
+              {!isCartPage && (
+                <li className="active">
+                  {isProductsPage ? 'Productos' : 'Producto'}
+                </li>
+              )}
+              {isCartPage && (
+                <li className="active">
+                  Carrito de Compras
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
       </div>
     </header>
   );

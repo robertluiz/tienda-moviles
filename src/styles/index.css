@@ -4,11 +4,14 @@
   --color-secondary: #666666;
   --color-accent: #0066CC;
   --color-background: #FFFFFF;
+  --color-background-light: #F5F5F5;
   --color-text: #000000;
   --color-text-light: #666666;
+  --color-text-secondary: #666666;
   --color-border: #EEEEEE;
   --color-error: #D23F31;
   --color-success: #0A8754;
+  --color-primary-dark: #333333;
 
   /* Tipografia */
   --font-family: 'Helvetica Neue', Arial, sans-serif;

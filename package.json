@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@tanstack/react-query": "^5.26.0",
+    "@tanstack/react-query": "^5.74.4",
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
@@ -16,6 +16,7 @@
   },
   "scripts": {
     "start": "vite",
+    "dev": "vite",
     "build": "tsc && vite build",
     "test": "vitest run",
     "lint": "eslint --ext .ts,.tsx src/",
@@ -52,4 +53,4 @@
     "vite": "^5.1.4",
     "vitest": "^1.3.1"
   }
-} 
+}

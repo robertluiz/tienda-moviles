@@ -1,16 +1,19 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
-import useProductList from '../../hooks/useProductList';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import Header from '../../components/Header/Header';
+import useProductList from '../../hooks/useProductList';
 import ProductListSkeleton from '../../components/ProductListSkeleton/ProductListSkeleton';
-import { Product } from '../../services/api';
 import './ProductListPage.css';
+import { useNavigate } from 'react-router-dom';
+import { Product } from '../../services/api';
 
-const ProductListPage = () => {
+const ProductListPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [title, setTitle] = useState<string>('Todos los Productos');
-  const [animationKey, setAnimationKey] = useState<number>(0);
+  const navigate = useNavigate();
+  const loaderRef = useRef<HTMLDivElement>(null);
+
   const {
     products,
     filteredTotal,
@@ -20,56 +23,42 @@ const ProductListPage = () => {
     refetch,
     loadMore,
     hasMore,
-    currentPage,
-    itemsPerPage
+    currentPage
   } = useProductList(searchTerm);
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  // Para depuração
-  useEffect(() => {
-    console.log(`Página atual: ${currentPage}, Produtos: ${products.length}, Total: ${filteredTotal}`);
-  }, [currentPage, products.length, filteredTotal]);
-
+  // Configurar IntersectionObserver para scroll infinito de forma otimizada
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
+
     if (entry && entry.isIntersecting && hasMore && !isLoading && !isLoadingMore) {
-      console.log("Observer detectou - carregando mais produtos");
       loadMore();
-      setAnimationKey(prev => prev + 1);
     }
   }, [hasMore, isLoading, isLoadingMore, loadMore]);
 
   useEffect(() => {
-    // Resetar o observer quando os produtos mudam
-    if (observerRef.current) {
-      observerRef.current.disconnect();
-    }
-
-    const options = {
+    // Configuração do observer para o infinite scroll
+    const observer = new IntersectionObserver(handleObserver, {
       root: null,
-      rootMargin: '300px',
-      threshold: 0
-    };
+      rootMargin: '200px',
+      threshold: 0.1
+    });
 
-    observerRef.current = new IntersectionObserver(handleObserver, options);
+    const currentRef = loaderRef.current;
 
-    if (loadMoreRef.current) {
-      observerRef.current.observe(loadMoreRef.current);
-      console.log("Observer conectado");
+    if (currentRef && hasMore) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
-  }, [handleObserver, products.length]);
+  }, [handleObserver, hasMore]);
 
   useEffect(() => {
     if (searchTerm) {
       setTitle(`Resultados para: ${searchTerm}`);
-      setAnimationKey(prev => prev + 1);
     } else {
       setTitle('Todos los Productos');
     }
@@ -79,10 +68,32 @@ const ProductListPage = () => {
     setSearchTerm(term);
   };
 
-  const handleLoadMore = () => {
-    console.log("Botão clicado - carregando mais produtos");
-    loadMore();
-    setAnimationKey(prev => prev + 1);
+  const handleGoToProduct = (product: Product) => {
+    navigate(`/product/${product.id}`);
+  };
+
+  // Renderizar mensagem de erro ou conteúdo vazio
+  const renderErrorOrEmpty = () => {
+    if (error) {
+      return (
+        <div className="error-container">
+          <p className="error-message">Se ha producido un error al cargar los productos.</p>
+          <button className="reload-button" onClick={() => refetch()}>
+            Intentar de nuevo
+          </button>
+        </div>
+      );
+    }
+
+    if (!isLoading && products.length === 0) {
+      return (
+        <div className="error-container">
+          <p>No se han encontrado productos.</p>
+        </div>
+      );
+    }
+
+    return null;
   };
 
   return (
@@ -95,63 +106,58 @@ const ProductListPage = () => {
             <SearchBar onSearch={handleSearch} />
           </div>
 
-          {error ? (
-            <div className="error-container">
-              <p className="error-message">Se ha producido un error al cargar los productos.</p>
-              <button className="reload-button" onClick={() => refetch()}>
-                Intentar de nuevo
-              </button>
-            </div>
-          ) : isLoading && products.length === 0 ? (
+          {isLoading && products.length === 0 ? (
             <ProductListSkeleton />
-          ) : products.length > 0 ? (
-            <>
-              <div className="product-grid" key={`product-grid-${animationKey}`}>
-                {products.map((product: Product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-
-              <div className="load-more-section">
-                {hasMore && (
-                  <div className="load-more-container">
-                    <button
-                      className="load-more-button"
-                      onClick={handleLoadMore}
-                      disabled={isLoading || isLoadingMore}
-                    >
-                      {isLoadingMore ? (
-                        <>
-                          <span className="button-loading-spinner"></span>
-                          <span>Cargando...</span>
-                        </>
-                      ) : (
-                        'Cargar más productos'
-                      )}
-                    </button>
-                  </div>
-                )}
-
-                <span className="products-counter">
-                  Mostrando {products.length} de {filteredTotal} productos (Página {currentPage})
-                </span>
-
-                {isLoadingMore && (
-                  <div className="loading-more-indicator">
-                    <div className="loading-spinner"></div>
-                    <span>Cargando más productos...</span>
-                  </div>
-                )}
-
-                <div ref={loadMoreRef} className="product-list-observer" id="observer-element">
-                  {/* Elemento para o intersection observer */}
-                </div>
-              </div>
-            </>
           ) : (
-            <div className="error-container">
-              <p>No se han encontrado productos.</p>
-            </div>
+            <>
+              {renderErrorOrEmpty()}
+
+              {products.length > 0 && (
+                <>
+                  <div className="product-grid">
+                    {products.map((product: Product) => (
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                        isNew={product.id === '1'} // Exemplo, substitua pela lógica real
+                      />
+                    ))}
+                  </div>
+
+                  <div className="load-more-section">
+                    {isLoadingMore && (
+                      <div className="loading-more-indicator">
+                        <div className="loading-spinner"></div>
+                        <span>Cargando más productos...</span>
+                      </div>
+                    )}
+
+                    {hasMore && !isLoadingMore && (
+                      <div className="load-more-container">
+                        <button
+                          className="load-more-button"
+                          onClick={loadMore}
+                          disabled={isLoading || isLoadingMore}
+                        >
+                          Cargar más productos
+                        </button>
+                      </div>
+                    )}
+
+                    <span className="products-counter">
+                      Mostrando {products.length} de {filteredTotal} productos (Página {currentPage})
+                    </span>
+
+                    {/* Elemento para o intersection observer (invisível) */}
+                    <div
+                      ref={loaderRef}
+                      className="product-list-observer"
+                      style={{ height: '100px', margin: '20px 0' }}
+                    />
+                  </div>
+                </>
+              )}
+            </>
           )}
         </div>
       </div>

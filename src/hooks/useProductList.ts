@@ -2,7 +2,20 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchProducts, Product } from '../services/api';
 import { useState, useCallback, useEffect, useRef } from 'react';
 
-export const useProductList = (searchTerm: string = '') => {
+interface UseProductListReturn {
+  products: Product[];
+  filteredTotal: number;
+  isLoading: boolean;
+  isLoadingMore: boolean;
+  error: Error | null;
+  refetch: () => void;
+  loadMore: () => void;
+  hasMore: boolean;
+  currentPage: number;
+  itemsPerPage: number;
+}
+
+export const useProductList = (searchTerm: string = ''): UseProductListReturn => {
   const [displayedProducts, setDisplayedProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -40,27 +53,34 @@ export const useProductList = (searchTerm: string = '') => {
       const nextPageItems = filteredProducts.slice(0, endIndex);
       
       setDisplayedProducts(nextPageItems);
-      setHasMore(nextPageItems.length < filteredProducts.length);
+      setHasMore(endIndex < filteredProducts.length);
       setIsLoadingMore(false);
-      
-      console.log(`Atualizando produtos: mostrando ${nextPageItems.length} de ${filteredProducts.length}`);
-      console.log(`Página ${currentPage}, itemsPerPage ${itemsPerPage}, endIndex ${endIndex}`);
+    } else {
+      setDisplayedProducts([]);
+      setHasMore(false);
+      setIsLoadingMore(false);
     }
   }, [filteredProducts, currentPage, itemsPerPage]);
 
   const loadMore = useCallback(() => {
     if (!isLoading && hasMore && !isLoadingMore) {
-      console.log(`Carregando mais produtos... Página atual: ${currentPage}`);
       setIsLoadingMore(true);
       
+      // Calcular a próxima página e verificar se há mais produtos
+      const nextPage = currentPage + 1;
+      const nextEndIndex = nextPage * itemsPerPage;
+      
+      // Simular delay de rede para mostrar o efeito de carregamento
       setTimeout(() => {
-        setCurrentPage(prevPage => {
-          console.log(`Incrementando página: ${prevPage} -> ${prevPage + 1}`);
-          return prevPage + 1;
-        });
-      }, 200);
+        setCurrentPage(nextPage);
+        
+        // Atualizar estado de hasMore após o incremento da página
+        if (nextEndIndex >= filteredProducts.length) {
+          setHasMore(false);
+        }
+      }, 800);
     }
-  }, [isLoading, hasMore, isLoadingMore, currentPage]);
+  }, [isLoading, hasMore, isLoadingMore, currentPage, filteredProducts.length, itemsPerPage]);
 
   return {
     products: displayedProducts,

@@ -2,13 +2,16 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useProductDetails from '../../hooks/useProductDetails';
 import useCart from '../../hooks/useCart';
+import useNotifications from '../../hooks/useNotifications';
 import Header from '../../components/Header/Header';
+import NotificationContainer from '../../components/Notification/NotificationContainer';
 import './ProductDetailPage.css';
 
 const ProductDetailPage = () => {
     const { id } = useParams<{ id: string }>();
     const { product, isLoading, error, refetch } = useProductDetails(id || '');
-    const { addProductToCart, isLoading: isAddingToCart } = useCart();
+    const { addProductToCart, isLoading: isAddingToCart, isSuccess, isError } = useCart();
+    const { notifications, showSuccess, showError, removeNotification } = useNotifications();
 
     const [selectedColor, setSelectedColor] = useState<number | null>(null);
     const [selectedStorage, setSelectedStorage] = useState<number | null>(null);
@@ -55,13 +58,18 @@ const ProductDetailPage = () => {
         setSelectedStorage(storageCode);
     };
 
-    const handleAddToCart = () => {
+    const handleAddToCart = async () => {
         if (selectedColor !== null && selectedStorage !== null && product) {
-            addProductToCart({
-                id: product.id,
-                colorCode: selectedColor,
-                storageCode: selectedStorage
-            });
+            try {
+                await addProductToCart({
+                    id: product.id,
+                    colorCode: selectedColor,
+                    storageCode: selectedStorage
+                });
+                showSuccess(`${product.brand} ${product.model} añadido al carrito`);
+            } catch (error) {
+                showError("Error al añadir el producto al carrito. Inténtelo de nuevo.");
+            }
         }
     };
 
@@ -70,6 +78,10 @@ const ProductDetailPage = () => {
     return (
         <div className="product-detail-container">
             <Header />
+            <NotificationContainer
+                notifications={notifications}
+                onRemove={removeNotification}
+            />
             <div className="product-detail-content">
                 <div className="container">
                     <div className="product-detail-header">

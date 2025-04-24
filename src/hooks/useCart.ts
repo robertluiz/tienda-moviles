@@ -1,28 +1,27 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AddToCartRequest, AddToCartResponse, addToCart } from '../services/api';
+import { addToCart, AddToCartRequest } from '../services/api';
 import useCartStore from '../store/cartStore';
 
 export const useCart = () => {
   const queryClient = useQueryClient();
-  const { setCartCount } = useCartStore();
+  const setCartCount = useCartStore(state => state.setCartCount);
 
   const mutation = useMutation({
     mutationFn: (request: AddToCartRequest) => addToCart(request),
-    onSuccess: (data: AddToCartResponse) => {
-      // Atualiza o contador do carrinho no store
+    onSuccess: (data) => {
       setCartCount(data.count);
-      
-      // Invalidar o cache de produtos se necessário
-      // queryClient.invalidateQueries({ queryKey: ['products'] });
-    },
-    onError: (error: Error) => {
-      console.error('Error adding to cart:', error);
     },
   });
 
+  const addProductToCart = (request: AddToCartRequest) => {
+    mutation.mutate(request);
+  };
+
   return {
-    addToCart: mutation.mutate,
+    addProductToCart,
     isLoading: mutation.isPending,
+    isSuccess: mutation.isSuccess,
+    isError: mutation.isError,
     error: mutation.error,
   };
 };

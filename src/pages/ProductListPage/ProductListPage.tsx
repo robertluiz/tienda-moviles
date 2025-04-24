@@ -3,6 +3,7 @@ import useProductList from '../../hooks/useProductList';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import Header from '../../components/Header/Header';
+import ProductListSkeleton from '../../components/ProductListSkeleton/ProductListSkeleton';
 import { Product } from '../../services/api';
 import './ProductListPage.css';
 
@@ -41,10 +42,7 @@ const ProductListPage = () => {
               </button>
             </div>
           ) : isLoading ? (
-            <div className="loading-container">
-              <div className="loading-spinner"></div>
-              <p>Carregando produtos...</p>
-            </div>
+            <ProductListSkeleton />
           ) : products.length > 0 ? (
             <div className="product-grid">
               {products.map((product: Product) => (

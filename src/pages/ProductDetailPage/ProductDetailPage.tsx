@@ -25,7 +25,6 @@ const ProductDetailPage = () => {
     const [selectedStorage, setSelectedStorage] = useState<number | null>(null);
     const [quantity, setQuantity] = useState<number>(1);
 
-    // Seleciona automaticamente a primeira opção quando o produto carrega
     useEffect(() => {
         if (product && product.options) {
             if (product.options.colors && product.options.colors.length > 0) {
@@ -55,7 +54,6 @@ const ProductDetailPage = () => {
         setQuantity(quantity + 1);
     };
 
-    // Verificar se o produto tem um preço válido
     const hasValidPrice = (product: any): boolean => {
         return product &&
             product.price !== undefined &&
@@ -121,7 +119,6 @@ const ProductDetailPage = () => {
         );
     }
 
-    // Verificar se o produto tem preço
     const priceIsValid = hasValidPrice(product);
 
     return (

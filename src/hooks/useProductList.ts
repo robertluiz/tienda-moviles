@@ -26,8 +26,8 @@ export const useProductList = (searchTerm: string = ''): UseProductListReturn =>
   const { data: products = [], isLoading, error, refetch } = useQuery({
     queryKey: ['products'],
     queryFn: fetchProducts,
-    staleTime: 60 * 60 * 1000, // 1 hora
-    gcTime: 60 * 60 * 1000, // 1 hora (anteriormente cacheTime)
+    staleTime: 60 * 60 * 1000, 
+    gcTime: 60 * 60 * 1000, 
   });
 
   const filteredProducts = searchTerm 
@@ -37,7 +37,7 @@ export const useProductList = (searchTerm: string = ''): UseProductListReturn =>
       )
     : products;
 
-  // Reset quando o termo de busca muda
+
   useEffect(() => {
     setDisplayedProducts([]);
     setCurrentPage(1);
@@ -46,7 +46,6 @@ export const useProductList = (searchTerm: string = ''): UseProductListReturn =>
     initialLoadComplete.current = false;
   }, [searchTerm]);
 
-  // Atualiza os produtos exibidos quando a página muda ou os produtos filtrados mudam
   useEffect(() => {
     if (filteredProducts.length > 0) {
       const endIndex = currentPage * itemsPerPage;
@@ -66,15 +65,12 @@ export const useProductList = (searchTerm: string = ''): UseProductListReturn =>
     if (!isLoading && hasMore && !isLoadingMore) {
       setIsLoadingMore(true);
       
-      // Calcular a próxima página e verificar se há mais produtos
       const nextPage = currentPage + 1;
       const nextEndIndex = nextPage * itemsPerPage;
       
-      // Simular delay de rede para mostrar o efeito de carregamento
       setTimeout(() => {
         setCurrentPage(nextPage);
         
-        // Atualizar estado de hasMore após o incremento da página
         if (nextEndIndex >= filteredProducts.length) {
           setHasMore(false);
         }

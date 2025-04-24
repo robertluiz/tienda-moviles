@@ -11,12 +11,11 @@ const CartWidget = () => {
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        // Mostrar tooltip solo si el carrito incrementa
+
         if (cartCount > prevCountRef.current) {
             setShowTooltip(true);
             setAnimate(true);
 
-            // Ocultar tooltip después de 5 segundos
             if (timeoutRef.current) {
                 clearTimeout(timeoutRef.current);
             }

@@ -10,8 +10,8 @@ export const useProductDetails = (productId: string) => {
   } = useQuery({
     queryKey: ['product', productId],
     queryFn: () => fetchProductDetails(productId),
-    staleTime: 60 * 60 * 1000, // 1 hora
-    gcTime: 60 * 60 * 1000, // 1 hora (anteriormente cacheTime)
+    staleTime: 60 * 60 * 1000, 
+    gcTime: 60 * 60 * 1000,
     enabled: !!productId,
     retry: 3,
     retryDelay: 1000

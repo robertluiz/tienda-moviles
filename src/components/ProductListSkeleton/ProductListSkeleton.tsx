@@ -1,7 +1,7 @@
 import './ProductListSkeleton.css';
 
 export const ProductListSkeleton = () => {
-    // Cria um array com 8 itens para simular uma grade de produtos
+
     const skeletons = Array.from({ length: 8 }, (_, index) => index + 1);
 
     return (

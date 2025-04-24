@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import Layout from '../../components/Layout/Layout';
@@ -8,7 +8,7 @@ import './ProductListPage.css';
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../../services/api';
 
-const ProductListPage: React.FC = () => {
+const ProductListPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [title, setTitle] = useState<string>('Todos los Productos');
   const navigate = useNavigate();
@@ -26,7 +26,6 @@ const ProductListPage: React.FC = () => {
     currentPage
   } = useProductList(searchTerm);
 
-  // Configurar IntersectionObserver para scroll infinito de forma otimizada
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
 
@@ -36,7 +35,7 @@ const ProductListPage: React.FC = () => {
   }, [hasMore, isLoading, isLoadingMore, loadMore]);
 
   useEffect(() => {
-    // Configuração do observer para o infinite scroll
+
     const observer = new IntersectionObserver(handleObserver, {
       root: null,
       rootMargin: '200px',
@@ -72,7 +71,7 @@ const ProductListPage: React.FC = () => {
     navigate(`/product/${product.id}`);
   };
 
-  // Renderizar mensagem de erro ou conteúdo vazio
+
   const renderErrorOrEmpty = () => {
     if (error) {
       return (
@@ -116,7 +115,7 @@ const ProductListPage: React.FC = () => {
                   <ProductCard
                     key={product.id}
                     product={product}
-                    isNew={product.id === '1'} // Exemplo, substitua pela lógica real
+                    isNew={product.id === '1'}
                   />
                 ))}
               </div>
@@ -145,7 +144,6 @@ const ProductListPage: React.FC = () => {
                   Mostrando {products.length} de {filteredTotal} productos (Página {currentPage})
                 </span>
 
-                {/* Elemento para o intersection observer (invisível) */}
                 <div
                   ref={loaderRef}
                   className="product-list-observer"

@@ -8,8 +8,8 @@ import './styles/index.css';
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            staleTime: 60 * 60 * 1000, // 1 hora
-            cacheTime: 60 * 60 * 1000, // 1 hora
+            staleTime: 60 * 60 * 1000,
+            gcTime: 60 * 60 * 1000,
         },
     },
 });

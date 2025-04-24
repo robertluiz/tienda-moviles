@@ -19,7 +19,6 @@ const ProductCard = ({
 }: ProductCardProps) => {
   const { id, brand, model, price, imgUrl } = product;
 
-  // Verificar se o produto tem um preço válido
   const hasValidPrice = (): boolean => {
     return Boolean(price) && !isNaN(parseFloat(price)) && parseFloat(price) > 0;
   };
@@ -57,7 +56,6 @@ const ProductCard = ({
     );
   };
 
-  // Verificar se o preço é válido
   const priceIsValid = hasValidPrice();
 
   return (

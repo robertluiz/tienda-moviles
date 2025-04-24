@@ -17,7 +17,7 @@ type QueryState<T> = {
 export const useCachedQuery = <T>({
   queryKey,
   queryFn,
-  cacheTime = 60 * 60 * 1000, // 1 hora por padrão
+  cacheTime = 60 * 60 * 1000,
   enabled = true,
 }: CachedQueryOptions<T>) => {
   const [state, setState] = useState<QueryState<T>>({
@@ -30,7 +30,6 @@ export const useCachedQuery = <T>({
     try {
       setState((prev: QueryState<T>) => ({ ...prev, isLoading: true, error: null }));
       
-      // Verificar cache se não estiver pulando
       if (!skipCache) {
         const cachedData = getWithExpiry<T>(queryKey);
         
@@ -44,7 +43,6 @@ export const useCachedQuery = <T>({
         }
       }
       
-      // Buscar dados e armazenar em cache
       const data = await queryFn();
       setWithExpiry(queryKey, data, cacheTime);
       

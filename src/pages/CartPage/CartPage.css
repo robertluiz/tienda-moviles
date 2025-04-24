@@ -50,8 +50,8 @@
 }
 
 .clear-cart-button:hover {
-  color: var(--color-error);
-  border-color: var(--color-error);
+  color: var(--color-background-light);
+  border-color: var(--color-primary-dark);
 }
 
 .cart-empty {
@@ -212,7 +212,7 @@
 }
 
 .cart-item-action:hover {
-  color: var(--color-error);
+  color: var(--color-background-light);
   text-decoration: underline;
 }
 

@@ -23,7 +23,7 @@ const Header = () => {
           </div>
         </div>
 
-        {!isHomePage && (
+        {(isCartPage || (!isHomePage && !isProductsPage)) && (
           <div className="breadcrumbs">
             <ul>
               <li>

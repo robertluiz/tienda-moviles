@@ -99,6 +99,7 @@ const ProductListPage: React.FC = () => {
   return (
     <div className="page-container">
       <Header />
+
       <div className="main-content">
         <div className="container">
           <div className="page-header">

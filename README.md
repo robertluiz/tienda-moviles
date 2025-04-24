@@ -1,33 +1,33 @@
 # Tienda Móviles
 
-Aplicação web para compra de dispositivos móveis, desenvolvida com React.
+Aplicación web para compra de dispositivos móviles, desarrollada con React.
 
-## 🚀 Tecnologias
+## 🚀 Tecnologías
 
 - [React](https://reactjs.org/)
 - [React Router](https://reactrouter.com/)
-- [Zustand](https://github.com/pmndrs/zustand) - Gerenciamento de estado
-- [React Query](https://react-query.tanstack.com/) - Gerenciamento de requisições e cache
+- [Zustand](https://github.com/pmndrs/zustand) - Gestión de estado
+- [React Query](https://react-query.tanstack.com/) - Gestión de peticiones y caché
 
 ## ✨ Características
 
-- Listagem de produtos com filtro em tempo real
-- Página de detalhes do produto
-- Adição de produtos ao carrinho
-- Cache de dados com expiração de 1 hora
-- Layout responsivo
-- Navegação sem recarregar página (SPA)
+- Listado de productos con filtro en tiempo real
+- Página de detalles del producto
+- Añadir productos al carrito
+- Caché de datos con caducidad de 1 hora
+- Diseño responsive
+- Navegación sin recargar página (SPA)
 
-## 🛠️ Instalação
+## 🛠️ Instalación
 
-Clone o repositório:
+Clona el repositorio:
 
 ```bash
-git clone https://github.com/seu-usuario/tienda-moviles.git
+git clone https://github.com/tu-usuario/tienda-moviles.git
 cd tienda-moviles
 ```
 
-Instale as dependências:
+Instala las dependencias:
 
 ```bash
 npm install
@@ -35,65 +35,65 @@ npm install
 
 ## 📋 Scripts
 
-- **Desenvolvimento**
+- **Desarrollo**
   ```bash
   npm start
   ```
-  Inicia o servidor de desenvolvimento em [http://localhost:3000](http://localhost:3000)
+  Inicia el servidor de desarrollo en [http://localhost:3000](http://localhost:3000)
 
-- **Build**
+- **Compilación**
   ```bash
   npm run build
   ```
-  Gera uma versão otimizada para produção
+  Genera una versión optimizada para producción
 
-- **Testes**
+- **Pruebas**
   ```bash
   npm test
   ```
-  Executa os testes automatizados
+  Ejecuta las pruebas automatizadas
 
 - **Lint**
   ```bash
   npm run lint
   ```
-  Verifica problemas de código e estilo
+  Verifica problemas de código y estilo
 
-## 📱 Estrutura do Projeto
+## 📱 Estructura del Proyecto
 
 ```
 src/
-├── components/       # Componentes reutilizáveis
+├── components/       # Componentes reutilizables
 ├── hooks/           # Hooks personalizados
-├── pages/           # Páginas da aplicação
-├── services/        # Serviços de API
-├── store/           # Gerenciamento de estado (Zustand)
-├── styles/          # Estilos globais
-└── utils/           # Funções utilitárias
+├── pages/           # Páginas de la aplicación
+├── services/        # Servicios de API
+├── store/           # Gestión de estado (Zustand)
+├── styles/          # Estilos globales
+└── utils/           # Funciones de utilidad
 ```
 
 ## 🔍 API
 
-A aplicação consome dados da API:
+La aplicación consume datos de la API:
 
-- Listagem de produtos: `GET /api/product`
-- Detalhes do produto: `GET /api/product/:id`
-- Adicionar ao carrinho: `POST /api/cart`
+- Listado de productos: `GET /api/product`
+- Detalles del producto: `GET /api/product/:id`
+- Añadir al carrito: `POST /api/cart`
 
-Base URL: `https://itx-frontend-test.onrender.com/`
+URL base: `https://itx-frontend-test.onrender.com/`
 
-## 📝 Implementação
+## 📝 Implementación
 
-### Gerenciamento de Estado
-- Utilizamos Zustand para gerenciar o estado global da aplicação de forma simples e eficiente
-- React Query para gerenciar requisições à API, incluindo cache e invalidação
+### Gestión de Estado
+- Utilizamos Zustand para gestionar el estado global de la aplicación de forma sencilla y eficiente
+- React Query para gestionar peticiones a la API, incluyendo caché e invalidación
 
-### Cache
-- Implementamos um sistema de cache com expiração de 1 hora para melhorar a performance
-- Dados são armazenados localmente para reduzir requisições à API
+### Caché
+- Hemos implementado un sistema de caché con caducidad de 1 hora para mejorar el rendimiento
+- Los datos se almacenan localmente para reducir las peticiones a la API
 
-### Requisitos Atendidos
-- SPA com navegação do lado do cliente
-- Scripts para desenvolvimento, build, testes e lint
-- Layout responsivo adaptado para diferentes tamanhos de tela
-- Filtro de produtos em tempo real 
+### Requisitos Cumplidos
+- SPA con navegación del lado del cliente
+- Scripts para desarrollo, compilación, pruebas y lint
+- Diseño responsive adaptado para diferentes tamaños de pantalla
+- Filtro de productos en tiempo real 

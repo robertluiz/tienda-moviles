@@ -12,6 +12,7 @@ Aplicación web para compra de dispositivos móviles, desarrollada con React y T
 - [React Query](https://tanstack.com/query/latest) - Gestión de peticiones y caché
 - [Axios](https://axios-http.com/) - Cliente HTTP
 - [Vitest](https://vitest.dev/) - Framework de testing
+- [GitHub Actions](https://github.com/features/actions) - CI/CD
 
 ## ✨ Características
 
@@ -22,6 +23,7 @@ Aplicación web para compra de dispositivos móviles, desarrollada con React y T
 - Diseño responsive
 - Navegación sin recargar página (SPA)
 - Testing unitario y de integración
+- Pipeline de CI/CD automatizado
 
 ## 🛠️ Instalación
 
@@ -44,7 +46,7 @@ npm install
   ```bash
   npm start
   ```
-  Inicia el servidor de desarrollo en [http://localhost:5173](http://localhost:5173)
+  Inicia el servidor de desarrollo en [http://localhost:3000](http://localhost:3000)
 
 - **Desarrollo (alternativo)**
   ```bash
@@ -151,4 +153,14 @@ Para contribuir al proyecto:
 
 ## 📄 Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT - ver el archivo LICENSE para más detalles. 
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo LICENSE para más detalles.
+
+## 🔄 CI/CD
+
+El proyecto utiliza GitHub Actions para la integración y despliegue continuos:
+
+- **Integración Continua**: Cada push y pull request ejecuta los tests y el linting
+- **Despliegue Continuo**: Los cambios en la rama principal (main/master) se despliegan automáticamente a GitHub Pages
+- **Entorno de Previsualización**: La aplicación desplegada está disponible en `https://[username].github.io/tienda-moviles/`
+
+Para más detalles, consulta el archivo de configuración en `.github/workflows/test-and-deploy.yml`. 

@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm install
       
+      - name: Install ESLint plugins
+        run: npm install eslint-plugin-react eslint-plugin-react-hooks @typescript-eslint/eslint-plugin @typescript-eslint/parser --save-dev
+      
       - name: Run linting
         run: npm run lint
       

@@ -4,7 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/tienda-moviles',
+  base: process.env.GITHUB_PAGE === 'true' ? '/tienda-moviles' : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

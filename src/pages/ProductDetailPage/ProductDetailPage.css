@@ -1,0 +1,229 @@
+.product-detail-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-detail-content {
+  flex: 1;
+  padding: 0;
+}
+
+.product-detail-container .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.product-detail-header {
+  margin-bottom: 2rem;
+}
+
+.product-breadcrumb {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.product-breadcrumb a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.product-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.product-breadcrumb span {
+  color: var(--color-text-secondary);
+}
+
+.product-detail-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.product-image-main {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  background-color: var(--color-background-light);
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
+.product-info-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.product-brand {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.product-price {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+}
+
+.product-price-unavailable {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+  white-space: nowrap;
+}
+
+.product-options-container {
+  margin-bottom: 2rem;
+}
+
+.option-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.option-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.option-button {
+  background-color: var(--color-background-light);
+  border: 2px solid var(--color-border);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.option-button:hover {
+  border-color: var(--color-primary);
+  background-color: #f0f0f0;
+}
+
+.option-button.selected {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.add-to-cart-button {
+  width: 100%;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s;
+  margin-top: auto;
+}
+
+.add-to-cart-button:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.add-to-cart-button:disabled {
+  background-color: var(--color-border);
+  cursor: not-allowed;
+}
+
+.error-container {
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--color-background-light);
+  border-radius: 0.5rem;
+  margin: 2rem 0;
+}
+
+.error-message {
+  font-size: 1rem;
+  color: var(--color-error);
+  margin-bottom: 1rem;
+}
+
+.quantity-section {
+  margin-top: 1.5rem;
+}
+
+.quantity-control-product {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  width: fit-content;
+  overflow: hidden;
+}
+
+.quantity-control-product .quantity-button {
+  background-color: var(--color-background-light);
+  border: none;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  font-weight: bold;
+  height: 36px;
+  width: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.quantity-control-product .quantity-button:hover {
+  background-color: var(--color-border);
+}
+
+.quantity-control-product .quantity-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-control-product .quantity-value {
+  padding: 0 1rem;
+  min-width: 40px;
+  text-align: center;
+  font-weight: bold;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .product-detail-main {
+    grid-template-columns: 1fr;
+  }
+  
+  .product-image-main {
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  
+  .product-price {
+    font-size: 1.5rem;
+  }
+} 

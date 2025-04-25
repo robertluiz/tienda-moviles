@@ -110,8 +110,7 @@ interface Notification {
 }
 
 vi.mock('../../components/Notification/NotificationContainer', () => ({
-    // @ts-ignore - Ignoramos el error TS6133: 'onRemove' is declared but its value is never read.
-    default: ({ notifications, onRemove }: {
+    default: ({ notifications }: {
         notifications: Notification[];
         onRemove: (id: string) => void
     }) => (

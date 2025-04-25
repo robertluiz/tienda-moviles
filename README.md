@@ -1,13 +1,17 @@
 # Tienda Móviles
 
-Aplicación web para compra de dispositivos móviles, desarrollada con React.
+Aplicación web para compra de dispositivos móviles, desarrollada con React y TypeScript.
 
 ## 🚀 Tecnologías
 
-- [React](https://reactjs.org/)
-- [React Router](https://reactrouter.com/)
+- [React 18](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/) - Herramienta de construcción
+- [React Router 6](https://reactrouter.com/) - Enrutamiento
 - [Zustand](https://github.com/pmndrs/zustand) - Gestión de estado
-- [React Query](https://react-query.tanstack.com/) - Gestión de peticiones y caché
+- [React Query](https://tanstack.com/query/latest) - Gestión de peticiones y caché
+- [Axios](https://axios-http.com/) - Cliente HTTP
+- [Vitest](https://vitest.dev/) - Framework de testing
 
 ## ✨ Características
 
@@ -17,6 +21,7 @@ Aplicación web para compra de dispositivos móviles, desarrollada con React.
 - Caché de datos con caducidad de 1 hora
 - Diseño responsive
 - Navegación sin recargar página (SPA)
+- Testing unitario y de integración
 
 ## 🛠️ Instalación
 
@@ -39,7 +44,13 @@ npm install
   ```bash
   npm start
   ```
-  Inicia el servidor de desarrollo en [http://localhost:3000](http://localhost:3000)
+  Inicia el servidor de desarrollo en [http://localhost:5173](http://localhost:5173)
+
+- **Desarrollo (alternativo)**
+  ```bash
+  npm run dev
+  ```
+  Alias para iniciar el servidor de desarrollo
 
 - **Compilación**
   ```bash
@@ -47,11 +58,29 @@ npm install
   ```
   Genera una versión optimizada para producción
 
+- **Previsualización**
+  ```bash
+  npm run preview
+  ```
+  Previsualiza la versión compilada
+
 - **Pruebas**
   ```bash
   npm test
   ```
   Ejecuta las pruebas automatizadas
+
+- **Pruebas con cobertura**
+  ```bash
+  npm run test:coverage
+  ```
+  Ejecuta las pruebas y genera informe de cobertura
+
+- **Pruebas en modo watch**
+  ```bash
+  npm run test:watch
+  ```
+  Ejecuta las pruebas en modo observador
 
 - **Lint**
   ```bash
@@ -69,7 +98,9 @@ src/
 ├── services/        # Servicios de API
 ├── store/           # Gestión de estado (Zustand)
 ├── styles/          # Estilos globales
-└── utils/           # Funciones de utilidad
+├── types/           # Definiciones de tipos TypeScript
+├── utils/           # Funciones de utilidad
+└── __tests__/       # Tests de la aplicación
 ```
 
 ## 🔍 API
@@ -92,8 +123,32 @@ URL base: `https://itx-frontend-test.onrender.com/`
 - Hemos implementado un sistema de caché con caducidad de 1 hora para mejorar el rendimiento
 - Los datos se almacenan localmente para reducir las peticiones a la API
 
-### Requisitos Cumplidos
-- SPA con navegación del lado del cliente
-- Scripts para desarrollo, compilación, pruebas y lint
-- Diseño responsive adaptado para diferentes tamaños de pantalla
-- Filtro de productos en tiempo real 
+### Testing
+- Pruebas unitarias y de integración con Vitest y Testing Library
+- Mocking de peticiones HTTP con MSW (Mock Service Worker)
+- Generación de informes de cobertura de código
+
+### Principios de Desarrollo
+- Aplicación de principios SOLID y Clean Code
+- Componentes con responsabilidad única
+- Separación clara de lógica de negocio y presentación
+- Estructura de proyecto organizada y escalable
+
+## 🛡️ Requisitos del Sistema
+
+- Node.js 16+
+- npm 7+
+
+## 👥 Colaboración
+
+Para contribuir al proyecto:
+
+1. Haz un fork del repositorio
+2. Crea una rama para tu funcionalidad (`git checkout -b feature/nueva-funcionalidad`)
+3. Haz commit de tus cambios (`git commit -m 'Añadir nueva funcionalidad'`)
+4. Sube los cambios a tu fork (`git push origin feature/nueva-funcionalidad`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo LICENSE para más detalles. 

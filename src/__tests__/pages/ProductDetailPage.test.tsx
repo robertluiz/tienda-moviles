@@ -110,7 +110,8 @@ interface Notification {
 }
 
 vi.mock('../../components/Notification/NotificationContainer', () => ({
-    default: ({ notifications, onRemove }: { // eslint-disable-line @typescript-eslint/no-unused-vars
+    // @ts-ignore - Ignoramos el error TS6133: 'onRemove' is declared but its value is never read.
+    default: ({ notifications, onRemove }: {
         notifications: Notification[];
         onRemove: (id: string) => void
     }) => (

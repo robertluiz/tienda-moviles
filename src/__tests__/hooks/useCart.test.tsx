@@ -9,8 +9,8 @@ vi.mock('../../store/cartStore', () => ({
     default: vi.fn()
 }));
 
-// Definición de tipo para el mock del store
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// Definición de tipo para el mock del store usado internamente
+// @ts-ignore - Ignoramos el error TS6196: 'MockCartStore' is declared but never used.
 interface MockCartStore {
     cartItems: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
     cartCount: number;

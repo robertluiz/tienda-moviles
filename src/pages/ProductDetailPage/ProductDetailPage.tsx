@@ -5,6 +5,7 @@ import useCart from '../../hooks/useCart';
 import useNotifications from '../../hooks/useNotifications';
 import Layout from '../../components/Layout/Layout';
 import NotificationContainer from '../../components/Notification/NotificationContainer';
+import { Product } from '../../services/api';
 import './ProductDetailPage.css';
 
 interface ExtendedAddToCartRequest {
@@ -53,7 +54,7 @@ const ProductDetailPage = () => {
         setQuantity(quantity + 1);
     };
 
-    const hasValidPrice = (product: any): boolean => {
+    const hasValidPrice = (product: Product): boolean => {
         return product &&
             product.price !== undefined &&
             product.price !== null &&

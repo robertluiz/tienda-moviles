@@ -9,7 +9,7 @@ import './CheckoutPage.css';
 const CheckoutPage = () => {
     const navigate = useNavigate();
     const { cartItems, subtotal, shipping, tax, total, formatPrice } = useCart();
-    const { isLoading, isSuccess, isError, submitCheckout } = useCheckout();
+    const { isLoading, isError, submitCheckout } = useCheckout();
 
     const [formData, setFormData] = useState<CheckoutRequest['customerDetails']>({
         firstName: '',

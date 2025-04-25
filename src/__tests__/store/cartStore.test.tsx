@@ -24,6 +24,10 @@ const mockProduct = {
     }
 };
 
+// Tipos para las funciones mockeadas
+type MockApiPost = ReturnType<typeof vi.fn<[string, object], Promise<{ data: { count: number } }>>>;
+type MockApiGet = ReturnType<typeof vi.fn<[string], Promise<{ data: typeof mockProduct }>>>;
+
 describe('cartStore', () => {
     beforeEach(() => {
         // Resetear los mocks de la API
@@ -156,12 +160,12 @@ describe('cartStore', () => {
         const { result } = renderHook(() => useCartStore());
 
         // Mock de la respuesta de la API
-        (api.default.post as any).mockResolvedValue({
+        (api.default.post as MockApiPost).mockResolvedValue({
             data: { count: 1 }
         });
 
         // Mock de la respuesta para obtener los detalles del producto
-        (api.default.get as any).mockResolvedValue({
+        (api.default.get as MockApiGet).mockResolvedValue({
             data: mockProduct
         });
 
@@ -192,12 +196,12 @@ describe('cartStore', () => {
         const { result } = renderHook(() => useCartStore());
 
         // Mock de la respuesta exitosa para la API del carrito
-        (api.default.post as any).mockResolvedValue({
+        (api.default.post as MockApiPost).mockResolvedValue({
             data: { count: 1 }
         });
 
         // Mock de error al obtener detalles del producto
-        (api.default.get as any).mockRejectedValue(new Error('Error al obtener producto'));
+        (api.default.get as MockApiGet).mockRejectedValue(new Error('Error al obtener producto'));
 
         // Espiar el console.error para verificar el mensaje de error
         const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => { });

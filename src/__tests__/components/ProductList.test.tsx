@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { vi, describe, it, expect } from 'vitest';
 import ProductList from '../../components/ProductList/ProductList';
 import { Product } from '../../services/api';
 

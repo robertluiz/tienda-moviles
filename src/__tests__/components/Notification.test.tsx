@@ -107,10 +107,10 @@ describe('Notification', () => {
     });
 
     it('maneja un tipo de notificación desconocido correctamente', () => {
-        // Usar any para poder pasar un tipo no válido
+        // Usar un tipo no válido
         render(
             <Notification
-                type={'unknown' as any}
+                type={'unknown' as 'success' | 'error' | 'info'}
                 message="Notificación con tipo desconocido"
             />
         );

@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import ProductDetailPage from '../../pages/ProductDetailPage/ProductDetailPage';
@@ -102,8 +102,18 @@ vi.mock('../../components/Layout/Layout', () => ({
     )
 }));
 
+// Definición de tipo para las notificaciones
+interface Notification {
+    id: string;
+    type: 'success' | 'error' | 'info';
+    message: string;
+}
+
 vi.mock('../../components/Notification/NotificationContainer', () => ({
-    default: ({ notifications, onRemove }: { notifications: any[], onRemove: any }) => (
+    default: ({ notifications, onRemove }: { // eslint-disable-line @typescript-eslint/no-unused-vars
+        notifications: Notification[];
+        onRemove: (id: string) => void
+    }) => (
         <div data-testid="notification-container">
             {notifications.length} notificaciones
         </div>

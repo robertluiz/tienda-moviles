@@ -29,8 +29,6 @@ interface MockCartStore {
 }
 
 describe('CartWidget', () => {
-    let originalUseRef: any;
-
     beforeEach(() => {
         vi.useFakeTimers();
         (useCartStore as unknown as MockInstance).mockReset();

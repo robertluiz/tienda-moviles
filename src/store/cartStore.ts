@@ -15,6 +15,10 @@ interface ExtendedAddToCartRequest extends AddToCartRequest {
   quantity?: number;
 }
 
+interface CartResponse {
+  count: number;
+}
+
 export interface CartState {
   cartItems: CartItem[];
   cartCount: number;
@@ -22,7 +26,7 @@ export interface CartState {
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
-  addProductToCart: (request: ExtendedAddToCartRequest, productData?: Product) => Promise<any>;
+  addProductToCart: (request: ExtendedAddToCartRequest, productData?: Product) => Promise<CartResponse>;
 }
 
 const useCartStore = create<CartState>()(

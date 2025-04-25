@@ -2,11 +2,24 @@ import { renderHook, act } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import useCart from '../../hooks/useCart';
 import useCartStore from '../../store/cartStore';
+import { MockInstance } from 'vitest';
 
 // Mock del store de carrito
 vi.mock('../../store/cartStore', () => ({
     default: vi.fn()
 }));
+
+// Definición de tipo para el mock del store
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface MockCartStore {
+    cartItems: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
+    cartCount: number;
+    addToCart: () => void;
+    removeFromCart: () => void;
+    updateQuantity: () => void;
+    clearCart: () => void;
+    addProductToCart: () => Promise<{ count: number }>;
+}
 
 describe('useCart', () => {
     // Producto de ejemplo para las pruebas
@@ -27,7 +40,7 @@ describe('useCart', () => {
         vi.resetAllMocks();
 
         // Configurar el mock del store
-        (useCartStore as any).mockReturnValue({
+        (useCartStore as unknown as MockInstance).mockReturnValue({
             cartItems: [],
             cartCount: 0,
             addToCart: vi.fn(),
@@ -49,7 +62,7 @@ describe('useCart', () => {
 
     it('debería calcular totales correctamente con productos en el carrito', () => {
         // Mock del store con elementos en el carrito
-        (useCartStore as any).mockReturnValue({
+        (useCartStore as unknown as MockInstance).mockReturnValue({
             cartItems: [
                 {
                     id: '1-1-2',
@@ -83,7 +96,7 @@ describe('useCart', () => {
             price: '49'
         };
 
-        (useCartStore as any).mockReturnValue({
+        (useCartStore as unknown as MockInstance).mockReturnValue({
             cartItems: [
                 {
                     id: '1-1-2',
@@ -124,7 +137,7 @@ describe('useCart', () => {
     it('debería llamar a addProductToCart del store cuando se añade un producto', async () => {
         const mockAddProductToCartApi = vi.fn().mockResolvedValue({ count: 1 });
 
-        (useCartStore as any).mockReturnValue({
+        (useCartStore as unknown as MockInstance).mockReturnValue({
             cartItems: [],
             cartCount: 0,
             addToCart: vi.fn(),
@@ -160,7 +173,7 @@ describe('useCart', () => {
         const mockError = new Error('Error al añadir al carrito');
         const mockAddProductToCartApi = vi.fn().mockRejectedValue(mockError);
 
-        (useCartStore as any).mockReturnValue({
+        (useCartStore as unknown as MockInstance).mockReturnValue({
             cartItems: [],
             cartCount: 0,
             addToCart: vi.fn(),

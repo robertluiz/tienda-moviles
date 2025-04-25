@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { vi, describe, it, expect, beforeEach, type Mock } from 'vitest';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import CheckoutPage from '../../pages/CheckoutPage/CheckoutPage';
 
@@ -8,7 +8,7 @@ const mockNavigate = vi.fn();
 vi.mock('react-router-dom', async () => {
     const actual = await vi.importActual('react-router-dom');
     return {
-        ...actual as any,
+        ...actual,
         useNavigate: () => mockNavigate
     };
 });

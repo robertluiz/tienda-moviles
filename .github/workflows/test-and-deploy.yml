@@ -1,0 +1,64 @@
+name: Test and Deploy
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  test-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      GITHUB_PAGE: 'true'
+
+    runs-on: ubuntu-latest    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Install ESLint plugins
+        run: npm install eslint-plugin-react eslint-plugin-react-hooks @typescript-eslint/eslint-plugin @typescript-eslint/parser --save-dev
+      
+      - name: Run linting
+        run: npm run lint
+      
+      - name: Run tests
+        run: npm test
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v5.0.0
+                
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3.0.1
+        with:
+          path: './dist'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4.0.5

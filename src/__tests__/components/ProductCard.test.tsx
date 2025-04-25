@@ -18,7 +18,20 @@ vi.mock('react-router-dom', async () => {
 });
 
 describe('ProductCard', () => {
-    const mockProduct: Product = {
+    // Crear un tipo extendido de Product con propiedades adicionales para testing
+    type ExtendedProduct = Product & {
+        cpu?: string;
+        ram?: string;
+        os?: string;
+        displaySize?: string;
+        battery?: string;
+        primaryCamera?: string;
+        secondaryCamera?: string;
+        dimentions?: string;
+        weight?: string;
+    };
+
+    const mockProduct: ExtendedProduct = {
         id: '1',
         brand: 'Apple',
         model: 'iPhone 12',

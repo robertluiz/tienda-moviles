@@ -9,7 +9,8 @@ vi.mock('../../store/cartStore', () => ({
     default: vi.fn()
 }));
 
-// Definición de tipo para el mock del store
+// Definición de tipo para el mock del store usado internamente
+// Esta interfaz es solo para documentación y no se usa directamente
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface MockCartStore {
     cartItems: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any

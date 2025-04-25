@@ -110,7 +110,7 @@ interface Notification {
 }
 
 vi.mock('../../components/Notification/NotificationContainer', () => ({
-    default: ({ notifications, onRemove }: { // eslint-disable-line @typescript-eslint/no-unused-vars
+    default: ({ notifications }: {
         notifications: Notification[];
         onRemove: (id: string) => void
     }) => (

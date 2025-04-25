@@ -162,5 +162,6 @@ El proyecto utiliza GitHub Actions para la integración y despliegue continuos:
 - **Integración Continua**: Cada push y pull request ejecuta los tests y el linting
 - **Despliegue Continuo**: Los cambios en la rama principal (main/master) se despliegan automáticamente a GitHub Pages
 - **Entorno de Previsualización**: La aplicación desplegada está disponible en `https://[username].github.io/tienda-moviles/`
+- **Gestión de Dependencias**: El workflow usa `npm install` para asegurar la sincronización entre package.json y package-lock.json
 
 Para más detalles, consulta el archivo de configuración en `.github/workflows/test-and-deploy.yml`. 

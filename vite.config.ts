@@ -4,7 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: process.env.GITHUB_PAGE === 'true' ? '/tienda-moviles' : '/',
+  base: process.env.GITHUB_PAGES === 'true' ? '/tienda-moviles/' : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -12,5 +12,12 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
   },
 }); 

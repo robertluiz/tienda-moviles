@@ -25,7 +25,7 @@ const DebugComponent = () => {
     );
 };
 
-// Tenta renderizar o componente de depuração
+
 try {
     const rootElement = document.getElementById('root');
 

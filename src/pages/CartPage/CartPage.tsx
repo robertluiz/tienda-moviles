@@ -120,9 +120,9 @@ const CartPage = () => {
                         <span>Total</span>
                         <span>{formatPrice(total)}</span>
                     </div>
-                    <button className="checkout-button">
+                    <Link to="/checkout" className="checkout-button">
                         FINALIZAR COMPRA
-                    </button>
+                    </Link>
                     <Link to="/" className="continue-shopping">
                         Continuar comprando
                     </Link>

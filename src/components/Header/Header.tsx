@@ -4,8 +4,6 @@ import './Header.css';
 
 const Header = () => {
   const location = useLocation();
-  const isHomePage = location.pathname === '/';
-  const isProductListPage = location.pathname === '/' || location.pathname === '/productos';
   const isCartPage = location.pathname === '/cart';
   const isProductDetailPage = location.pathname.startsWith('/product/');
 

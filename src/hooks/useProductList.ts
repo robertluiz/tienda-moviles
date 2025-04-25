@@ -2,6 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchProducts, Product } from '../services/api';
 import { useState, useCallback, useEffect, useRef } from 'react';
 
+// Constante para determinar el tiempo de carga (0 en entorno de test)
+const LOAD_MORE_DELAY = process.env.NODE_ENV === 'test' ? 0 : 800;
+
 interface UseProductListReturn {
   products: Product[];
   filteredTotal: number;
@@ -68,13 +71,23 @@ export const useProductList = (searchTerm: string = ''): UseProductListReturn =>
       const nextPage = currentPage + 1;
       const nextEndIndex = nextPage * itemsPerPage;
       
-      setTimeout(() => {
+      // En entorno de test (LOAD_MORE_DELAY = 0), se ejecuta inmediatamente
+      if (LOAD_MORE_DELAY === 0) {
         setCurrentPage(nextPage);
-        
         if (nextEndIndex >= filteredProducts.length) {
           setHasMore(false);
         }
-      }, 800);
+        setIsLoadingMore(false);
+      } else {
+        setTimeout(() => {
+          setCurrentPage(nextPage);
+          
+          if (nextEndIndex >= filteredProducts.length) {
+            setHasMore(false);
+          }
+          setIsLoadingMore(false);
+        }, LOAD_MORE_DELAY);
+      }
     }
   }, [isLoading, hasMore, isLoadingMore, currentPage, filteredProducts.length, itemsPerPage]);
 

@@ -1,25 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchProductDetails, Product } from '../services/api';
+import { fetchProductDetails } from '../services/api';
 
-export const useProductDetails = (productId: string) => {
+const useProductDetails = (productId: string) => {
   const { 
     data: product, 
     isLoading, 
-    error, 
+    isError, 
+    error,
     refetch 
   } = useQuery({
     queryKey: ['product', productId],
     queryFn: () => fetchProductDetails(productId),
-    staleTime: 60 * 60 * 1000, 
-    gcTime: 60 * 60 * 1000,
-    enabled: !!productId,
-    retry: 3,
-    retryDelay: 1000
+    staleTime: 1000 * 60 * 60, 
+    retry: 1,
   });
 
   return {
     product,
     isLoading,
+    isError,
     error,
     refetch
   };

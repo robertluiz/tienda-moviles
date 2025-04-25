@@ -7,7 +7,6 @@ import Layout from '../../components/Layout/Layout';
 import NotificationContainer from '../../components/Notification/NotificationContainer';
 import './ProductDetailPage.css';
 
-// Definir a interface estendida localmente para lidar com propriedade quantity
 interface ExtendedAddToCartRequest {
     id: string;
     colorCode: number;
@@ -18,8 +17,8 @@ interface ExtendedAddToCartRequest {
 const ProductDetailPage = () => {
     const { id } = useParams<{ id: string }>();
     const { product, isLoading, error, refetch } = useProductDetails(id || '');
-    const { addProductToCart, isLoading: isAddingToCart, isSuccess, isError } = useCart();
-    const { notifications, showSuccess, showError, removeNotification } = useNotifications();
+    const { addProductToCart, isLoading: isAddingToCart } = useCart();
+    const { notifications, showSuccess, removeNotification } = useNotifications();
 
     const [selectedColor, setSelectedColor] = useState<number | null>(null);
     const [selectedStorage, setSelectedStorage] = useState<number | null>(null);
@@ -65,7 +64,12 @@ const ProductDetailPage = () => {
     const handleAddToCart = () => {
         if (!product) return;
 
-        if (selectedColor === null || selectedStorage === null) {
+        // Verificar si el producto debería tener color seleccionado
+        const needsColor = product.options?.colors && product.options.colors.length > 0;
+        const needsStorage = product.options?.storages && product.options.storages.length > 0;
+
+        // Verificar si falta seleccionar alguna opción requerida
+        if ((needsColor && selectedColor === null) || (needsStorage && selectedStorage === null)) {
             console.error('Opções não selecionadas');
             return;
         }
@@ -77,12 +81,12 @@ const ProductDetailPage = () => {
 
         const request: ExtendedAddToCartRequest = {
             id: product.id,
-            colorCode: Number(selectedColor),
-            storageCode: Number(selectedStorage),
+            colorCode: selectedColor !== null ? Number(selectedColor) : 0,
+            storageCode: selectedStorage !== null ? Number(selectedStorage) : 0,
             quantity: quantity
         };
 
-        addProductToCart(request, product);
+        addProductToCart(request);
 
         showSuccess(`${product.brand} ${product.model} añadido al carrito`);
     };
@@ -161,7 +165,7 @@ const ProductDetailPage = () => {
                                 <div className="color-options">
                                     <h3 className="option-title">Color</h3>
                                     <div className="option-list">
-                                        {product.options.colors.map((color) => (
+                                        {product.options.colors.map((color: { code: number, name: string }) => (
                                             <button
                                                 key={color.code}
                                                 className={`option-button ${selectedColor === color.code ? 'selected' : ''}`}
@@ -178,7 +182,7 @@ const ProductDetailPage = () => {
                                 <div className="storage-options">
                                     <h3 className="option-title">Almacenamiento</h3>
                                     <div className="option-list">
-                                        {product.options.storages.map((storage) => (
+                                        {product.options.storages.map((storage: { code: number, name: string }) => (
                                             <button
                                                 key={storage.code}
                                                 className={`option-button ${selectedStorage === storage.code ? 'selected' : ''}`}

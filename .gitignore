@@ -14,3 +14,4 @@ yarn-error.log*
 /build
 TASKS.md
 .cursor/
+/coverage

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Notification, { NotificationType } from './Notification';
 import './Notification.css';
 

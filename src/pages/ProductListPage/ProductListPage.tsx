@@ -5,13 +5,11 @@ import Layout from '../../components/Layout/Layout';
 import useProductList from '../../hooks/useProductList';
 import ProductListSkeleton from '../../components/ProductListSkeleton/ProductListSkeleton';
 import './ProductListPage.css';
-import { useNavigate } from 'react-router-dom';
 import { Product } from '../../services/api';
 
 const ProductListPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [title, setTitle] = useState<string>('Todos los Productos');
-  const navigate = useNavigate();
   const loaderRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -66,11 +64,6 @@ const ProductListPage = () => {
   const handleSearch = (term: string) => {
     setSearchTerm(term);
   };
-
-  const handleGoToProduct = (product: Product) => {
-    navigate(`/product/${product.id}`);
-  };
-
 
   const renderErrorOrEmpty = () => {
     if (error) {

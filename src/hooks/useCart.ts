@@ -1,10 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import useCartStore from '../store/cartStore';
-import { Product } from '../services/api';
 import { CartItem } from '../store/cartStore';
 import { AddToCartRequest } from '../services/api';
 
-// Interface estendida que inclui a quantidade
 interface ExtendedAddToCartRequest extends AddToCartRequest {
   quantity?: number;
 }
@@ -63,7 +61,7 @@ export const useCart = () => {
     });
   };
 
-  const addProductToCart = async (request: ExtendedAddToCartRequest, productData?: Product) => {
+  const addProductToCart = async (request: ExtendedAddToCartRequest) => {
     setIsLoading(true);
     setIsSuccess(false);
     setIsError(false);
@@ -100,5 +98,5 @@ export const useCart = () => {
   };
 };
 
-// Exportação padrão para compatibilidade
+
 export default useCart; 

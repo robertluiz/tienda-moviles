@@ -11,7 +11,7 @@ vi.mock('../../components/Header/Header', () => ({
 describe('Layout', () => {
     it('renderiza el Header y el contenido hijo', () => {
         render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <Layout>
                     <div data-testid="test-content">Contenido de prueba</div>
                 </Layout>

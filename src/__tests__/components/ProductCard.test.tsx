@@ -54,7 +54,7 @@ describe('ProductCard', () => {
 
     it('renderiza correctamente los detalles básicos del producto', () => {
         render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <ProductCard product={mockProduct} />
             </BrowserRouter>
         );
@@ -76,7 +76,7 @@ describe('ProductCard', () => {
 
     it('muestra la insignia de nuevo cuando isNew es true', () => {
         render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <ProductCard product={mockProduct} isNew={true} />
             </BrowserRouter>
         );
@@ -86,7 +86,7 @@ describe('ProductCard', () => {
 
     it('muestra la insignia de descuento cuando isDiscount es true', () => {
         render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <ProductCard product={mockProduct} isDiscount={true} discountPercentage={20} />
             </BrowserRouter>
         );
@@ -96,7 +96,7 @@ describe('ProductCard', () => {
 
     it('muestra tanto la insignia de nuevo como la de descuento cuando ambas son true', () => {
         render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <ProductCard product={mockProduct} isNew={true} isDiscount={true} discountPercentage={15} />
             </BrowserRouter>
         );
@@ -107,7 +107,7 @@ describe('ProductCard', () => {
 
     it('muestra las estrellas de calificación cuando se proporciona rating', () => {
         render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <ProductCard product={mockProduct} rating={4.5} />
             </BrowserRouter>
         );
@@ -127,7 +127,7 @@ describe('ProductCard', () => {
         const invalidPriceProduct = { ...mockProduct, price: 'No disponible' };
 
         render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <ProductCard product={invalidPriceProduct} />
             </BrowserRouter>
         );

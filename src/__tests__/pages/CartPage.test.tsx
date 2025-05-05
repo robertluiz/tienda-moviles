@@ -68,7 +68,7 @@ describe('CartPage', () => {
 
     it('debería mostrar mensaje de carrito vacío cuando no hay items', () => {
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartPage />
             </MemoryRouter>
         );
@@ -94,7 +94,7 @@ describe('CartPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartPage />
             </MemoryRouter>
         );
@@ -123,7 +123,7 @@ describe('CartPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartPage />
             </MemoryRouter>
         );
@@ -146,7 +146,7 @@ describe('CartPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartPage />
             </MemoryRouter>
         );
@@ -182,7 +182,7 @@ describe('CartPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartPage />
             </MemoryRouter>
         );
@@ -206,7 +206,7 @@ describe('CartPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartPage />
             </MemoryRouter>
         );
@@ -232,7 +232,7 @@ describe('CartPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartPage />
             </MemoryRouter>
         );
@@ -259,7 +259,7 @@ describe('CartPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartPage />
             </MemoryRouter>
         );
@@ -292,7 +292,7 @@ describe('CartPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartPage />
             </MemoryRouter>
         );
@@ -319,7 +319,7 @@ describe('CartPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartPage />
             </MemoryRouter>
         );

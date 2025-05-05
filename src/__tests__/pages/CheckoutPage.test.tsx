@@ -109,7 +109,7 @@ describe('CheckoutPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CheckoutPage />
             </MemoryRouter>
         );
@@ -121,7 +121,7 @@ describe('CheckoutPage', () => {
 
     it('debería mostrar el formulario de checkout y el resumen del pedido cuando hay items en el carrito', () => {
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CheckoutPage />
             </MemoryRouter>
         );
@@ -163,7 +163,7 @@ describe('CheckoutPage', () => {
 
     it('debería mostrar errores de validación cuando se envía el formulario vacío', async () => {
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CheckoutPage />
             </MemoryRouter>
         );
@@ -189,7 +189,7 @@ describe('CheckoutPage', () => {
 
     it('debería validar el formato de email correctamente', async () => {
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CheckoutPage />
             </MemoryRouter>
         );
@@ -215,7 +215,7 @@ describe('CheckoutPage', () => {
 
     it('debería validar el formato de teléfono correctamente', async () => {
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CheckoutPage />
             </MemoryRouter>
         );
@@ -241,7 +241,7 @@ describe('CheckoutPage', () => {
 
     it('debería validar el formato de código postal correctamente', async () => {
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CheckoutPage />
             </MemoryRouter>
         );
@@ -267,7 +267,7 @@ describe('CheckoutPage', () => {
 
     it('debería enviar el formulario correctamente con datos válidos', async () => {
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CheckoutPage />
             </MemoryRouter>
         );
@@ -324,7 +324,7 @@ describe('CheckoutPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CheckoutPage />
             </MemoryRouter>
         );
@@ -358,7 +358,7 @@ describe('CheckoutPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CheckoutPage />
             </MemoryRouter>
         );
@@ -379,7 +379,7 @@ describe('CheckoutPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CheckoutPage />
             </MemoryRouter>
         );
@@ -413,7 +413,7 @@ describe('CheckoutPage', () => {
         });
 
         render(
-            <MemoryRouter>
+            <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CheckoutPage />
             </MemoryRouter>
         );

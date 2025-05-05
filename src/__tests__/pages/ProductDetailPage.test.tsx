@@ -127,7 +127,7 @@ describe('ProductDetailPage', () => {
 
     const renderWithRouter = (id: string = '1') => {
         render(
-            <MemoryRouter initialEntries={[`/product/${id}`]}>
+            <MemoryRouter initialEntries={[`/product/${id}`]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <Routes>
                     <Route path="/product/:id" element={<ProductDetailPage />} />
                 </Routes>

@@ -44,7 +44,7 @@ describe('CartWidget', () => {
         }));
 
         render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -58,7 +58,7 @@ describe('CartWidget', () => {
         }));
 
         render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -74,7 +74,7 @@ describe('CartWidget', () => {
         }));
 
         const { rerender, container } = render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -87,7 +87,7 @@ describe('CartWidget', () => {
         }));
 
         rerender(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -113,7 +113,7 @@ describe('CartWidget', () => {
         }));
 
         const { rerender, container } = render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -126,7 +126,7 @@ describe('CartWidget', () => {
         }));
 
         rerender(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -152,7 +152,7 @@ describe('CartWidget', () => {
         }));
 
         const { rerender } = render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -165,7 +165,7 @@ describe('CartWidget', () => {
         }));
 
         rerender(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -190,7 +190,7 @@ describe('CartWidget', () => {
         }));
 
         const { rerender } = render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -203,7 +203,7 @@ describe('CartWidget', () => {
         }));
 
         rerender(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -227,7 +227,7 @@ describe('CartWidget', () => {
         }));
 
         const { rerender } = render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -240,7 +240,7 @@ describe('CartWidget', () => {
         }));
 
         rerender(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -264,7 +264,7 @@ describe('CartWidget', () => {
         }));
 
         const { rerender } = render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -277,7 +277,7 @@ describe('CartWidget', () => {
         }));
 
         rerender(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -299,7 +299,7 @@ describe('CartWidget', () => {
         }));
 
         const { container } = render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -314,7 +314,7 @@ describe('CartWidget', () => {
         }));
 
         render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -333,7 +333,7 @@ describe('CartWidget', () => {
         }));
 
         const { rerender } = render(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -346,7 +346,7 @@ describe('CartWidget', () => {
         }));
 
         rerender(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );
@@ -362,7 +362,7 @@ describe('CartWidget', () => {
         }));
 
         rerender(
-            <BrowserRouter>
+            <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <CartWidget />
             </BrowserRouter>
         );

@@ -22,7 +22,7 @@ const Notification = ({
         const timer = setTimeout(() => {
             setIsVisible(false);
             setTimeout(() => {
-                onClose && onClose();
+                if (onClose) onClose();
             }, 300);
         }, duration);
 
@@ -32,7 +32,7 @@ const Notification = ({
     const handleClose = () => {
         setIsVisible(false);
         setTimeout(() => {
-            onClose && onClose();
+            if (onClose) onClose();
         }, 300);
     };
 

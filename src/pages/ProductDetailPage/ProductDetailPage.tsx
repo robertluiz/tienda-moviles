@@ -149,6 +149,7 @@ const ProductDetailPage = () => {
                             src={product.imgUrl}
                             alt={`${product.brand} ${product.model}`}
                             className="product-image-main"
+                            loading="eager"
                         />
                     </div>
 
